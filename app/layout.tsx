@@ -5,6 +5,7 @@ import "./globals.css";
 const inter = Inter({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
+  display: "swap",
 });
 
 const playfair = Playfair_Display({
@@ -12,44 +13,51 @@ const playfair = Playfair_Display({
   weight: ["400", "500", "600", "700"],
   style: ["normal", "italic"],
   variable: "--font-playfair",
+  display: "swap",
 });
 
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ||
-  "https://konkreto.vercel.app";
+  "https://konkreto-five.vercel.app";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Konkreto | Maceteros y productos de cemento con diseño",
+    default:
+      "Konkreto | Maceteros y jardineras de cemento con diseño",
     template: "%s | Konkreto",
   },
   description:
-    "Konkreto fabrica maceteros de cemento, jardineras, bancas, platos, bases y productos personalizados con diseño, calidad y resistencia.",
+    "Diseñamos y fabricamos maceteros de cemento, jardineras, bancas y piezas personalizadas. Piezas de cemento para transformar tus espacios con diseño contemporáneo y fabricación artesanal.",
   keywords: [
-    "Konkreto",
     "maceteros de cemento",
     "jardineras de cemento",
+    "maceteros grandes cemento",
+    "maceteros para exterior",
+    "maceteros personalizados",
+    "jardineras a medida",
     "productos de cemento",
+    "piezas de cemento",
     "maceteros decorativos",
     "fabricación de maceteros",
     "productos personalizados de cemento",
+    "Konkreto",
   ],
   alternates: {
     canonical: "/",
   },
   openGraph: {
-    title: "Konkreto | Maceteros y productos de cemento con diseño",
+    title: "Konkreto | Maceteros y jardineras de cemento con diseño",
     description:
-      "Fabricación artesanal de maceteros de cemento, jardineras y productos personalizados para exteriores y jardines.",
+      "Piezas de cemento diseñadas para transformar espacios. Maceteros, jardineras y fabricación personalizada con diseño contemporáneo.",
     url: siteUrl,
     siteName: "Konkreto",
     images: [
       {
-        url: "/favicon.png",
+        url: "/logos/favicon.png",
         width: 1200,
         height: 630,
-        alt: "Konkreto",
+        alt: "Konkreto — Piezas de cemento diseñadas",
       },
     ],
     locale: "es_CL",
@@ -57,14 +65,18 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Konkreto | Maceteros y productos de cemento con diseño",
+    title: "Konkreto | Maceteros y jardineras de cemento con diseño",
     description:
-      "Productos de cemento premium con diseño moderno para jardines, patios y espacios exteriores.",
-    images: ["favicon.png"],
+      "Piezas de cemento diseñadas para transformar espacios. Maceteros, jardineras y fabricación personalizada.",
+    images: ["/logos/favicon.png"],
   },
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+    },
   },
 };
 
@@ -77,7 +89,7 @@ const jsonLd = {
       name: "Konkreto",
       url: siteUrl,
       description:
-        "Fabricación de maceteros de cemento, jardineras, bancas, platos, bases y productos personalizados.",
+        "Diseñamos y fabricamos maceteros de cemento, jardineras, bancas, platos, bases y productos personalizados.",
       areaServed: {
         "@type": "Country",
         name: "Chile",
@@ -85,11 +97,16 @@ const jsonLd = {
       knowsAbout: [
         "maceteros de cemento",
         "jardineras de cemento",
-        "productos de cemento",
+        "piezas de cemento",
+        "fabricación artesanal de cemento",
         "maceteros decorativos",
-        "fabricación de maceteros",
         "productos personalizados de cemento",
       ],
+      contactPoint: {
+        "@type": "ContactPoint",
+        contactType: "customer service",
+        availableLanguage: "Spanish",
+      },
     },
     {
       "@type": "WebSite",
@@ -100,6 +117,18 @@ const jsonLd = {
         "@id": `${siteUrl}/#organization`,
       },
       inLanguage: "es-CL",
+    },
+    {
+      "@type": "LocalBusiness",
+      "@id": `${siteUrl}/#business`,
+      name: "Konkreto",
+      url: siteUrl,
+      description:
+        "Fabricación de maceteros de cemento, jardineras, bancas y productos personalizados en Chile.",
+      areaServed: {
+        "@type": "Country",
+        name: "Chile",
+      },
     },
   ],
 };
@@ -114,7 +143,7 @@ export default function RootLayout({
       lang="es"
       className={`${inter.className} ${playfair.variable} h-full antialiased`}
     >
-      <body className="relative min-h-screen bg-[#8C8C88] text-[#f5f1eb]">
+      <body className="relative min-h-screen bg-[#111111] text-[#f5f1eb]">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -122,8 +151,8 @@ export default function RootLayout({
           }}
         />
 
-        <div className="fixed inset-0 -z-40 bg-[#8C8C88]" />
-        <div className="fixed inset-0 -z-30 bg-[radial-gradient(circle_at_top_right,rgba(143,155,124,0.16),transparent_45%)]" />
+        <div className="fixed inset-0 -z-40 bg-[#111111]" />
+        <div className="fixed inset-0 -z-30 bg-[radial-gradient(ellipse_80%_50%_at_80%_-10%,rgba(143,155,124,0.10),transparent_60%)]" />
         {children}
       </body>
     </html>

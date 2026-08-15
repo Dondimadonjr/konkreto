@@ -1,38 +1,45 @@
 const categorias = [
   {
+    numero: "01",
     titulo: "Maceteros",
-    texto: "Diseños limpios y resistentes para terrazas, patios y jardines.",
+    texto: "Piezas que convierten una planta en protagonista.",
     href: "#contacto",
   },
   {
+    numero: "02",
     titulo: "Jardineras",
-    texto: "Piezas de cemento con presencia y equilibrio visual.",
+    texto: "Soluciones de gran formato para terrazas y jardines.",
     href: "#contacto",
   },
   {
+    numero: "03",
     titulo: "Bancas",
-    texto: "Mobiliario exterior que combina confort y durabilidad.",
+    texto: "Diseño y resistencia para espacios exteriores.",
     href: "#contacto",
   },
   {
+    numero: "04",
     titulo: "Platos",
-    texto: "Soluciones funcionales para espacios exteriores.",
+    texto: "Detalles funcionales que completan cada pieza.",
     href: "#contacto",
   },
   {
+    numero: "05",
     titulo: "Bases",
-    texto: "Elementos estructurales y decorativos para proyectos diversos.",
+    texto: "Volumen, proporción y presencia para tus espacios.",
     href: "#contacto",
   },
   {
+    numero: "06",
     titulo: "Decoración",
-    texto: "Piezas únicas para darle carácter a cada entorno.",
+    texto: "Piezas que aportan carácter y textura al entorno.",
     href: "#contacto",
   },
   {
+    numero: "07",
     titulo: "Personalizados",
-    texto: "Trabajos a medida para proyectos especiales y necesidades concretas.",
-    href: "#contacto",
+    texto: "Creamos piezas según las necesidades de tu proyecto.",
+    href: "#personalizados",
   },
 ];
 
@@ -40,39 +47,44 @@ export default function Categorias() {
   return (
     <section
       id="categorias"
-      className="relative mx-auto max-w-7xl scroll-mt-20 px-6 py-20 sm:py-24"
+      className="relative mx-auto max-w-7xl scroll-mt-20 px-5 py-16 sm:px-6 sm:py-20 lg:px-8"
       style={{ zIndex: 1 }}
     >
       <div className="mb-10 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
-        <div className="max-w-2xl">
-          <p className="mb-3 text-sm uppercase tracking-[0.35em] text-[#8f9b7c]">
+        <div className="max-w-xl">
+          <p className="mb-3 text-xs font-medium uppercase tracking-[0.38em] text-[#8f9b7c]">
             Categorías
           </p>
           <h2 className="text-3xl font-semibold leading-tight text-[#f5f1eb] sm:text-4xl">
-            Productos de cemento pensados para jardines, exteriores y proyectos premium.
+            Lo que fabricamos
           </h2>
         </div>
-        <p className="max-w-xl text-sm leading-7 text-[#d7d0c8] sm:text-base">
-          Desde maceteros decorativos hasta piezas funcionales, cada línea está diseñada para aportar textura y elegancia.
+        <p className="max-w-md text-sm leading-7 text-[#d7d0c8] sm:text-base">
+          Cada línea está pensada para un uso específico. Si no encuentras lo que buscas, lo fabricamos a medida.
         </p>
       </div>
 
-      <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
         {categorias.map((categoria) => (
           <article
             key={categoria.titulo}
-            className="group rounded-[1.75rem] border border-white/10 bg-white/6 p-7 shadow-[0_16px_46px_rgba(0,0,0,0.16)] transition duration-300 hover:-translate-y-1 hover:border-[#8f9b7c]/35 hover:bg-white/10"
+            className="group relative rounded-2xl border border-white/10 bg-white/4 p-6 shadow-[0_12px_36px_rgba(0,0,0,0.12)] transition duration-300 hover:-translate-y-0.5 hover:border-[#8f9b7c]/30 hover:bg-white/[0.07]"
           >
-            <div className="flex items-center justify-between">
-              <h3 className="text-2xl font-semibold text-white">{categoria.titulo}</h3>
-              <span className="text-sm font-medium uppercase tracking-[0.26em] text-[#8f9b7c]">
-                Konkreto
-              </span>
-            </div>
-            <p className="mt-4 text-sm leading-7 text-[#d7d0c8]">{categoria.texto}</p>
+            <span className="block text-xs font-semibold uppercase tracking-[0.32em] text-[#8f9b7c]/70">
+              {categoria.numero}
+            </span>
+
+            <h3 className="mt-3 text-xl font-semibold text-white">
+              {categoria.titulo}
+            </h3>
+
+            <p className="mt-2 text-sm leading-6 text-[#d7d0c8]">
+              {categoria.texto}
+            </p>
+
             <a
               href={categoria.href}
-              className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#f5f1eb] transition group-hover:gap-3"
+              className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-[#8f9b7c] transition duration-200 group-hover:gap-2.5 group-hover:text-[#aeb99b]"
             >
               Consultar
               <span aria-hidden="true">→</span>

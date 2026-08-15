@@ -1,15 +1,16 @@
 @import "tailwindcss";
 
 :root {
-  --background: #8f9b7c;
+  --background: #111111;
   --foreground: #f5f1eb;
+  --accent: #8f9b7c;
+  --accent-light: #aeb99b;
+  --text-muted: #d7d0c8;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
 }
 
 * {
@@ -18,22 +19,33 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 64px;
 }
 
 body {
   margin: 0;
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
 }
 
 ::selection {
-  background: rgba(143, 155, 124, 0.35);
+  background: rgba(143, 155, 124, 0.32);
   color: #f5f1eb;
 }
 
 img {
   display: block;
+}
+
+/* Focus visible accesible */
+:focus-visible {
+  outline: 2px solid #8f9b7c;
+  outline-offset: 3px;
+}
+
+/* Evitar focus ring en clics con mouse */
+:focus:not(:focus-visible) {
+  outline: none;
 }
 
 input,
@@ -49,6 +61,18 @@ textarea:-webkit-autofill:hover,
 textarea:-webkit-autofill:focus {
   -webkit-text-fill-color: #f5f1eb;
   caret-color: #f5f1eb;
-  box-shadow: 0 0 0 1000px rgba(255, 255, 255, 0.06) inset;
+  box-shadow: 0 0 0 1000px rgba(255, 255, 255, 0.04) inset;
   transition: background-color 9999s ease-in-out 0s;
+}
+
+/* Reducir motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

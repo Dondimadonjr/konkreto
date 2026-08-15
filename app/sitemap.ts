@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 
 const baseUrl =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ||
-  "https://konkreto.vercel.app";
+  "https://konkreto-five.vercel.app";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
@@ -13,19 +13,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1,
     },
     {
-      url: `${baseUrl}/propiedades/macetero-01`,
+      url: `${baseUrl}/productos/macetero-01`,
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/propiedades/jardinera-02`,
+      url: `${baseUrl}/productos/jardinera-02`,
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/propiedades/plato-03`,
+      url: `${baseUrl}/productos/plato-03`,
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.8,
