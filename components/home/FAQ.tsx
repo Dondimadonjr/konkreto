@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 type Categoria = "Personalización" | "Productos" | "Compra y despacho";
 
@@ -100,9 +100,19 @@ function ToggleIcon({ open }: { open: boolean }) {
 export default function FAQ() {
   const [categoria, setCategoria] = useState<(typeof CATEGORIAS)[number]>("Todas");
   const [abierta, setAbierta] = useState<string | null>(null);
+  const [busqueda, setBusqueda] = useState("");
 
-  const faqsFiltradas =
-    categoria === "Todas" ? faqs : faqs.filter((item) => item.categoria === categoria);
+  const faqsFiltradas = useMemo(() => {
+    const texto = busqueda.toLowerCase().trim();
+
+    return faqs.filter((item) => {
+      const coincideCategoria = categoria === "Todas" || item.categoria === categoria;
+      const coincideBusqueda =
+        !texto || `${item.pregunta} ${item.respuesta}`.toLowerCase().includes(texto);
+
+      return coincideCategoria && coincideBusqueda;
+    });
+  }, [busqueda, categoria]);
 
   function toggle(pregunta: string) {
     setAbierta((prev) => (prev === pregunta ? null : pregunta));
@@ -110,6 +120,11 @@ export default function FAQ() {
 
   function cambiarCategoria(nueva: (typeof CATEGORIAS)[number]) {
     setCategoria(nueva);
+    setAbierta(null);
+  }
+
+  function limpiarBusqueda() {
+    setBusqueda("");
     setAbierta(null);
   }
 
@@ -140,12 +155,12 @@ export default function FAQ() {
         className="pointer-events-none absolute -right-40 top-0 h-105 w-105 rounded-full bg-[#8f9b7c]/10 blur-[120px]"
       />
 
-      <div className="relative mb-12 flex flex-col gap-8 sm:mb-16">
+      <div className="relative mb-10 grid gap-8 sm:mb-14 lg:grid-cols-[0.85fr_1.15fr] lg:items-end lg:gap-16">
         <div className="max-w-xl">
           <p className="mb-3 text-xs font-medium uppercase tracking-[0.38em] text-[#8f9b7c]">
             Preguntas frecuentes
           </p>
-          <h2 className="text-3xl font-semibold leading-tight text-[#f5f1eb] sm:text-4xl lg:text-5xl">
+          <h2 className="text-3xl font-semibold leading-[1.08] text-[#f5f1eb] sm:text-4xl lg:text-5xl">
             Resolvemos tus dudas
           </h2>
           <p className="mt-4 text-sm leading-7 text-[#a09890] sm:text-base">
@@ -154,38 +169,67 @@ export default function FAQ() {
           </p>
         </div>
 
-        {/* Tabs con subrayado */}
-        <div
-          className="flex flex-wrap gap-x-7 gap-y-3 border-b border-white/8"
-          role="group"
-          aria-label="Filtrar preguntas por categoría"
-        >
-          {CATEGORIAS.map((cat) => {
-            const activa = categoria === cat;
-            return (
+        <div className="flex flex-col gap-4">
+          <label className="relative block">
+            <span className="sr-only">Buscar en preguntas frecuentes</span>
+            <span aria-hidden="true" className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-[#8f9b7c]">⌕</span>
+            <input
+              type="search"
+              value={busqueda}
+              onChange={(event) => setBusqueda(event.target.value)}
+              placeholder="Buscar una pregunta..."
+              className="h-12 w-full rounded-xl border border-white/10 bg-white/5 pl-11 pr-10 text-sm text-[#f5f1eb] placeholder:text-white/35 transition focus:border-[#8f9b7c]/60 focus:bg-white/7 focus:outline-none"
+            />
+            {busqueda && (
               <button
-                key={cat}
                 type="button"
-                onClick={() => cambiarCategoria(cat)}
-                aria-pressed={activa}
-                className={`relative pb-3 text-xs font-medium uppercase tracking-[0.2em] transition sm:text-sm ${
-                  activa ? "text-[#f5f1eb]" : "text-[#6e6860] hover:text-[#a09890]"
-                }`}
+                onClick={limpiarBusqueda}
+                aria-label="Limpiar búsqueda"
+                className="absolute right-3 top-1/2 flex h-7 w-7 -translate-y-1/2 items-center justify-center rounded-full text-white/45 transition hover:bg-white/10 hover:text-white"
               >
-                {cat}
-                <span
-                  className={`absolute inset-x-0 -bottom-px h-0.5 rounded-full bg-[#8f9b7c] transition-transform duration-300 ${
-                    activa ? "scale-x-100" : "scale-x-0"
-                  }`}
-                />
+                ×
               </button>
-            );
-          })}
+            )}
+          </label>
+
+          <div className="-mx-1 overflow-x-auto px-1 pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden" role="group" aria-label="Filtrar preguntas por categoría">
+            <div className="flex min-w-max gap-2">
+              {CATEGORIAS.map((cat) => {
+                const activa = categoria === cat;
+                return (
+                  <button
+                    key={cat}
+                    type="button"
+                    onClick={() => cambiarCategoria(cat)}
+                    aria-pressed={activa}
+                    className={`rounded-full border px-4 py-2.5 text-xs font-semibold transition sm:text-sm ${
+                      activa
+                        ? "border-[#8f9b7c]/60 bg-[#8f9b7c]/15 text-[#dfe8d1]"
+                        : "border-white/10 bg-white/3 text-white/50 hover:border-white/20 hover:text-white/85"
+                    }`}
+                  >
+                    {cat}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
         </div>
       </div>
 
+      <div className="relative mb-4 flex items-center justify-between gap-4">
+        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white/35">
+          {faqsFiltradas.length} {faqsFiltradas.length === 1 ? "pregunta" : "preguntas"}
+        </p>
+        {(busqueda || categoria !== "Todas") && (
+          <button type="button" onClick={() => { setCategoria("Todas"); limpiarBusqueda(); }} className="text-xs font-semibold text-[#aeb99b] underline-offset-4 hover:text-white hover:underline">
+            Ver todas
+          </button>
+        )}
+      </div>
+
       {/* Grid de preguntas en cards */}
-      <div className="relative grid gap-4 lg:grid-cols-2">
+      <div className="relative grid gap-3 sm:gap-4 lg:grid-cols-2">
         {faqsFiltradas.map((item, index) => {
           const estaAbierto = abierta === item.pregunta;
           const id = `faq-${categoria}-${index}`;
@@ -205,12 +249,12 @@ export default function FAQ() {
                 aria-controls={`${id}-respuesta`}
                 id={`${id}-pregunta`}
                 onClick={() => toggle(item.pregunta)}
-                className="flex w-full items-start gap-4 p-6 text-left sm:p-7"
+                className="flex w-full items-start gap-3 p-4 text-left sm:gap-4 sm:p-6"
               >
                 <span className="mt-1 font-mono text-xs text-[#8f9b7c]/70 sm:text-sm">
                   {String(index + 1).padStart(2, "0")}
                 </span>
-                <span className="flex-1 text-base font-medium leading-snug text-[#f5f1eb] sm:text-lg">
+                <span className="flex-1 text-[15px] font-medium leading-snug text-[#f5f1eb] sm:text-lg">
                   {item.pregunta}
                 </span>
                 <ToggleIcon open={estaAbierto} />
@@ -225,7 +269,7 @@ export default function FAQ() {
                 }`}
               >
                 <div className="min-h-0 overflow-hidden">
-                  <p className="px-6 pb-6 pl-13 text-sm leading-7 text-[#d7d0c8] sm:px-7 sm:pb-7 sm:pl-14">
+                  <p className="px-4 pb-5 pl-11 text-sm leading-7 text-[#d7d0c8] sm:px-6 sm:pb-6 sm:pl-14">
                     {item.respuesta}
                   </p>
                 </div>
@@ -242,17 +286,17 @@ export default function FAQ() {
       </div>
 
       {/* CTA inferior */}
-    <div className="relative mt-8 flex flex-col items-center justify-between gap-4 rounded-2xl border border-white/8 bg-linear-to-br from-[#8f9b7c]/10 to-transparent px-6 py-5 text-center sm:mt-10 sm:flex-row sm:text-left">
-      <p className="text-sm leading-6 text-[#d7d0c8]">
-      ¿Tienes una pregunta que no está aquí? Escríbenos y te respondemos directamente.
+    <div className="relative mt-8 flex flex-col items-stretch justify-between gap-4 rounded-2xl border border-white/8 bg-linear-to-br from-[#8f9b7c]/10 to-transparent px-5 py-5 sm:mt-10 sm:flex-row sm:items-center sm:px-6 sm:text-left">
+      <p className="max-w-xl text-sm leading-6 text-[#d7d0c8]">
+        ¿Tienes una pregunta que no está aquí? Escríbenos y te respondemos directamente.
       </p>
         <a
           href="https://wa.me/56972086522?text=Hola,%20tengo%20una%20consulta%20sobre%20productos%20Mortarium."
           target="_blank"
           rel="noopener noreferrer"
-          className="shrink-0 rounded-full bg-[#f5f1eb] px-5 py-2.5 text-sm font-semibold text-[#111111] transition hover:-translate-y-0.5"
+          className="inline-flex min-h-11 shrink-0 items-center justify-center rounded-xl bg-[#f5f1eb] px-5 py-2.5 text-sm font-semibold text-[#111111] transition hover:-translate-y-0.5 hover:bg-white"
         >
-          Escríbenos por WhatsApp
+            Escríbenos por WhatsApp
       </a>
     </div>
     </section>

@@ -18,7 +18,7 @@ const playfair = Playfair_Display({
 
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ||
-  "https://konkreto-five.vercel.app";
+  "https://mortarium.vercel.app";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),

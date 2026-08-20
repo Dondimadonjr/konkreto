@@ -13,7 +13,7 @@ export default function Header() {
     ["Categorías", "#categorias"],
     ["Personalizados", "#personalizados"],
     ["Contacto", "#contacto"],
-    ["FAQ", "#faq"],
+    ["Nosotros", "#nosotros"],
   ];
 
   useEffect(() => {
@@ -74,7 +74,7 @@ export default function Header() {
         <a
           href="#"
           aria-label="Ir al inicio de Mortarium"
-          className="flex items-center gap-3 transition hover:opacity-85"
+          className="flex items-center gap-2 transition hover:opacity-85 sm:gap-3"
         >
           <Image
             src="/Iconos/icono.png"
@@ -82,15 +82,17 @@ export default function Header() {
             width={160}
             height={80}
             className={`w-auto object-contain transition-all duration-300 ${
-              compacto ? "h-11" : "h-12 md:h-14"
+              compacto ? "h-11 sm:h-15" : "h-12 sm:h-14 md:h-16"
             }`}
             priority
           />
-          <span className="hidden flex-col leading-none sm:flex">
-            <span className="text-[0.95rem] font-semibold tracking-[0.26em] text-[#f5f1eb]">
+
+          <span className="flex flex-col leading-none">
+            <span className="text-[0.65rem] font-semibold tracking-[0.18em] text-[#f5f1eb] sm:text-[0.8rem] sm:tracking-[0.22em] md:text-[0.95rem] md:tracking-[0.26em]">
               MORTARIUM
             </span>
-            <span className="mt-1 text-[0.58rem] font-medium uppercase tracking-[0.3em] text-[#8f9b7c]">
+
+            <span className="mt-1 text-[0.42rem] font-medium uppercase tracking-[0.18em] text-[#8f9b7c] sm:text-[0.5rem] sm:tracking-[0.25em] md:text-[0.58rem] md:tracking-[0.3em]">
               Diseño en cemento
             </span>
           </span>
@@ -129,21 +131,27 @@ export default function Header() {
             aria-label={menuAbierto ? "Cerrar menú" : "Abrir menú"}
             aria-expanded={menuAbierto}
             onClick={() => setMenuAbierto((prev) => !prev)}
-            className="flex h-10 w-10 flex-col items-center justify-center gap-1.25 rounded-full border border-white/15 bg-black/25 backdrop-blur-sm transition hover:bg-black/40 md:hidden"
+            className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/15 bg-black/25 backdrop-blur-sm transition-colors duration-200 hover:bg-black/40 md:hidden"
           >
             <span
-              className={`block h-[1.5px] w-5 bg-white transition-all duration-300 ${
-                menuAbierto ? "translate-y-[6.5px] rotate-45" : ""
+              className={`absolute h-px w-5 bg-white transition-all duration-300 ease-out ${
+                menuAbierto
+                  ? "rotate-45"
+                  : "-translate-y-1"
               }`}
             />
+
             <span
-              className={`block h-[1.5px] w-5 bg-white transition-all duration-300 ${
-                menuAbierto ? "opacity-0" : ""
+              className={`absolute h-px w-5 bg-white transition-all duration-200 ${
+                menuAbierto ? "opacity-0" : "opacity-100"
               }`}
             />
+
             <span
-              className={`block h-[1.5px] w-5 bg-white transition-all duration-300 ${
-                menuAbierto ? "translate-y-[6.5px] -rotate-45" : ""
+              className={`absolute h-px w-5 bg-white transition-all duration-300 ease-out ${
+                menuAbierto
+                  ? "-rotate-45"
+                  : "translate-y-1"
               }`}
             />
           </button>

@@ -25,7 +25,7 @@ export default function Personalizados() {
   return (
     <section
       id="personalizados"
-      className="relative mx-auto max-w-7xl scroll-mt-5 px-5 py-16 sm:px-6 sm:py-20 lg:px-8"
+      className="relative mx-auto max-w-7xl scroll-mt-3 px-5 py-16 sm:px-6 sm:py-20 lg:px-8"
       style={{ zIndex: 1 }}
     >
       <div className="overflow-hidden rounded-4xl border border-[#8f9b7c]/20 bg-[linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03))] shadow-[0_20px_60px_rgba(0,0,0,0.16)]">

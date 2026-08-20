@@ -54,8 +54,7 @@ type Props = {
 type Filtro = {
   categoria: string;
   material: string;
-  precioMaximo: string;
-  stockMinimo: string;
+  precio: string;
 };
 
 const DEFAULT_VISIBLE = 6;
@@ -82,12 +81,25 @@ function obtenerIdProducto(producto: Producto) {
   return producto.slug || producto.id;
 }
 
+function FiltroActivo({ label, onRemove }: { label: string; onRemove: () => void }) {
+  return (
+    <button
+      type="button"
+      onClick={onRemove}
+      className="inline-flex items-center gap-2 rounded-lg border border-[#8f9b7c]/30 bg-[#8f9b7c]/10 px-2.5 py-1.5 text-xs font-medium capitalize text-[#dfe8d1] transition hover:border-[#8f9b7c]/60 hover:bg-[#8f9b7c]/20"
+      aria-label={`Quitar filtro ${label}`}
+    >
+      {label}
+      <span aria-hidden="true" className="text-sm leading-none text-[#aeb99b]">×</span>
+    </button>
+  );
+}
+
 export default function ProductosFiltro({ propiedades }: Props) {
   const [filtro, setFiltro] = useState<Filtro>({
     categoria: "",
     material: "",
-    precioMaximo: "",
-    stockMinimo: "",
+    precio: "",
   });
 
   const [orden, setOrden] = useState("recomendadas");
@@ -100,7 +112,7 @@ export default function ProductosFiltro({ propiedades }: Props) {
   );
 
   const productosFiltrados = useMemo(() => {
-    const stockMinimo = Number(filtro.stockMinimo || 0);
+    
 
     const resultado = productosDisponibles.filter((producto) => {
       const categoria = normalizarTexto(producto.categoria);
@@ -114,16 +126,20 @@ export default function ProductosFiltro({ propiedades }: Props) {
         return false;
       }
 
-      if (stockMinimo > 0 && (producto.stock ?? 0) < stockMinimo) {
+      const precio = obtenerNumeroPrecio(producto.precio);
+      if (filtro.precio === "hasta-60000" && (precio === null || precio > 60000)) {
         return false;
       }
 
-      if (filtro.precioMaximo) {
-        const precioMaximo = Number(filtro.precioMaximo);
-        const precioProducto = obtenerNumeroPrecio(producto.precio);
-        if (precioProducto !== null && precioProducto > precioMaximo) {
-          return false;
-        }
+      if (
+        filtro.precio === "60000-100000" &&
+        (precio === null || precio < 60000 || precio > 100000)
+      ) {
+        return false;
+      }
+
+      if (filtro.precio === "desde-100000" && (precio === null || precio < 100000)) {
+        return false;
       }
 
       return true;
@@ -140,6 +156,14 @@ export default function ProductosFiltro({ propiedades }: Props) {
 
         case "recientes":
           return obtenerFecha(b) - obtenerFecha(a);
+
+        case "precio-menor":
+          return (obtenerNumeroPrecio(a.precio) ?? Infinity) -
+            (obtenerNumeroPrecio(b.precio) ?? Infinity);
+
+        case "precio-mayor":
+          return (obtenerNumeroPrecio(b.precio) ?? -Infinity) -
+            (obtenerNumeroPrecio(a.precio) ?? -Infinity);
 
         case "recomendadas":
         default:
@@ -165,24 +189,26 @@ export default function ProductosFiltro({ propiedades }: Props) {
   }
 
   function limpiarFiltros() {
-    setFiltro({ categoria: "", material: "", precioMaximo: "", stockMinimo: "" });
+    setFiltro({ categoria: "", material: "", precio: "" });
     setOrden("recomendadas");
     setCantidadVisible(DEFAULT_VISIBLE);
   }
 
-  const campoFiltro =
-    "h-11 w-full rounded-xl border border-white/10 bg-white/[0.03] px-4 text-sm text-white outline-none placeholder:text-white/35 transition focus:border-[#8f9b7c]/50 focus:bg-white/[0.05]";
-
   return (
     <section className="relative">
-      {/* Barra de herramientas — filtros colapsados por defecto */}
-      <div className="mb-6 flex flex-wrap items-center gap-3">
+      {/* Barra de herramientas */}
+      <div className="mb-6 rounded-2xl border border-white/10 bg-[#171715] p-3 shadow-[0_18px_50px_rgba(0,0,0,0.18)] sm:p-4">
+        <div className="flex flex-wrap items-center gap-3">
         {/* Toggle filtros */}
         <button
           type="button"
           aria-expanded={mostrarFiltros}
           onClick={() => setMostrarFiltros((prev) => !prev)}
-          className="flex items-center gap-2 rounded-full border border-white/12 bg-white/5 px-4 py-2 text-sm font-medium text-[#d7d0c8] transition hover:border-white/22 hover:bg-white/10"
+          className={`flex h-11 items-center gap-2 rounded-xl border px-4 text-sm font-semibold transition ${
+            mostrarFiltros || cantidadFiltrosActivos > 0
+              ? "border-[#8f9b7c]/60 bg-[#8f9b7c]/15 text-[#dfe8d1]"
+              : "border-white/12 bg-white/5 text-[#d7d0c8] hover:border-white/22 hover:bg-white/10"
+          }`}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -206,7 +232,7 @@ export default function ProductosFiltro({ propiedades }: Props) {
         </button>
 
         {/* Ordenar — siempre visible */}
-        <div className="w-44">
+        <div className="w-full sm:w-52">
           <SelectPro
             label="Ordenar"
             value={orden}
@@ -218,12 +244,15 @@ export default function ProductosFiltro({ propiedades }: Props) {
               { label: "Recomendados", value: "recomendadas" },
               { label: "Más recientes", value: "recientes" },
               { label: "Destacados", value: "destacadas" },
+              { label: "Precio: menor a mayor", value: "precio-menor" },
+              { label: "Precio: mayor a menor", value: "precio-mayor" },
+              { label: "Mayor disponibilidad", value: "stock" },
             ]}
           />
         </div>
 
         {/* Resultado y limpiar */}
-        <div className="ml-auto flex items-center gap-3 text-sm text-white/45">
+        <div className="ml-auto flex items-center gap-3 px-1 text-sm text-white/45">
           <span>
             <span className="font-semibold text-white/80">
               {productosFiltrados.length}
@@ -240,6 +269,23 @@ export default function ProductosFiltro({ propiedades }: Props) {
             </button>
           )}
         </div>
+        </div>
+
+        {cantidadFiltrosActivos > 0 && (
+          <div className="mt-3 flex flex-wrap items-center gap-2 border-t border-white/8 px-1 pt-3">
+            <span className="mr-1 text-[10px] font-bold uppercase tracking-[0.18em] text-white/35">
+              Filtros activos
+            </span>
+            {filtro.categoria && <FiltroActivo label={filtro.categoria} onRemove={() => actualizarFiltro("categoria", "")} />}
+            {filtro.material && <FiltroActivo label={filtro.material} onRemove={() => actualizarFiltro("material", "")} />}
+            {filtro.precio && (
+              <FiltroActivo
+                label={filtro.precio === "hasta-60000" ? "Hasta $60.000" : filtro.precio === "60000-100000" ? "$60.000 - $100.000" : "Desde $100.000"}
+                onRemove={() => actualizarFiltro("precio", "")}
+              />
+            )}
+          </div>
+        )}
       </div>
 
       {/* Panel filtros colapsable */}
@@ -248,8 +294,19 @@ export default function ProductosFiltro({ propiedades }: Props) {
           mostrarFiltros ? "mb-6 max-h-96 opacity-100" : "max-h-0 opacity-0"
         }`}
       >
-        <div className="rounded-2xl border border-white/10 bg-white/3 p-5">
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="rounded-2xl border border-white/10 bg-[#191916] p-5 shadow-[0_20px_60px_rgba(0,0,0,0.2)]">
+          <div className="mb-5 flex items-end justify-between gap-4">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#8f9b7c]">Personaliza tu búsqueda</p>
+              <p className="mt-1 text-sm text-white/45">Combina los criterios para encontrar la pieza ideal.</p>
+            </div>
+            {cantidadFiltrosActivos > 0 && (
+              <button type="button" onClick={limpiarFiltros} className="shrink-0 text-xs font-semibold text-white/50 underline-offset-4 hover:text-white hover:underline">
+                Restablecer
+              </button>
+            )}
+          </div>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             <SelectPro
               label="Categoría"
               value={filtro.categoria}
@@ -271,35 +328,17 @@ export default function ProductosFiltro({ propiedades }: Props) {
               ]}
             />
 
-            <div>
-              <label className="mb-2 block text-xs font-medium uppercase tracking-[0.16em] text-white/40">
-                Stock mínimo
-              </label>
-              <input
-                type="number"
-                min="0"
-                inputMode="numeric"
-                placeholder="0"
-                value={filtro.stockMinimo}
-                onChange={(e) => actualizarFiltro("stockMinimo", e.target.value)}
-                className={campoFiltro}
-              />
-            </div>
-
-            <div>
-              <label className="mb-2 block text-xs font-medium uppercase tracking-[0.16em] text-white/40">
-                Precio máximo
-              </label>
-              <input
-                type="number"
-                min="0"
-                inputMode="numeric"
-                placeholder="Hasta $"
-                value={filtro.precioMaximo}
-                onChange={(e) => actualizarFiltro("precioMaximo", e.target.value)}
-                className={campoFiltro}
-              />
-            </div>
+            <SelectPro
+              label="Precio"
+              value={filtro.precio}
+              onChange={(value) => actualizarFiltro("precio", value)}
+              options={[
+                { label: "Todos los precios", value: "" },
+                { label: "Hasta $60.000", value: "hasta-60000" },
+                { label: "$60.000 - $100.000", value: "60000-100000" },
+                { label: "Desde $100.000", value: "desde-100000" },
+              ]}
+            />
           </div>
         </div>
       </div>

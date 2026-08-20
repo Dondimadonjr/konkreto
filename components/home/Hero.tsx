@@ -28,7 +28,7 @@ export default function Hero() {
         <div className="w-full max-w-170">
           {/* Eyebrow */}
           <p className="mb-6 text-xs font-medium uppercase tracking-[0.38em] text-[#aeb99b]">
-            Mortarium · Fabricación artesanal
+             Fabricación artesanal
           </p>
 
           {/* Título */}

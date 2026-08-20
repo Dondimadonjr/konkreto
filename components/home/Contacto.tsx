@@ -5,7 +5,7 @@ export default function Contacto() {
   return (
     <section
       id="contacto"
-      className="relative mx-auto max-w-7xl scroll-mt-0.5 px-5 py-16 sm:px-6 sm:py-20 lg:px-8"
+      className="relative mx-auto max-w-7xl scroll-mt-20 px-5 py-16 sm:px-6 sm:py-20 lg:px-8"
       style={{ zIndex: 1 }}
     >
       <div className="overflow-hidden rounded-4xl border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03))] shadow-[0_20px_60px_rgba(0,0,0,0.16)]">

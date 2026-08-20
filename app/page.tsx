@@ -139,9 +139,7 @@ export default function HomePage() {
       <ScrollReveal delayMs={60}>
         <Nosotros />
       </ScrollReveal>
-      <ScrollReveal delayMs={60}>
-        <FAQ />
-      </ScrollReveal>
+
       <ScrollReveal delayMs={60}>
         <Contacto />
       </ScrollReveal>
