@@ -1,15 +1,14 @@
-import CatalogoProductos from "@/components/home/CatalogoProductos";
-import Categorias from "@/components/home/Categorias";
-import Contacto from "@/components/home/Contacto";
 import FAQ from "@/components/home/FAQ";
-import FloatingWhatsApp from "@/components/home/FloatingWhatsApp";
-import Footer from "@/components/home/Footer";
-import Galeria from "@/components/home/Galeria";
-import Header from "@/components/home/Header";
 import Hero from "@/components/home/Hero";
+import Header from "@/components/home/Header";
+import Footer from "@/components/home/Footer";
+import Contacto from "@/components/home/Contacto";
+import Nosotros from "@/components/home/Nosotros";
+import Categorias from "@/components/home/Categorias";
 import Personalizados from "@/components/home/Personalizados";
-import Proceso from "@/components/home/Proceso";
 import ScrollReveal from "@/components/animations/ScrollReveal";
+import FloatingWhatsApp from "@/components/home/FloatingWhatsApp";
+import CatalogoProductos from "@/components/home/CatalogoProductos";
 
 // Nota: estas imágenes existen en /public/image/ con estos nombres exactos
 const productosLista = [
@@ -67,6 +66,60 @@ const productosLista = [
     disponible: true,
     created_at: new Date().toISOString(),
   },
+  {
+        id: "banca-04",
+    slug: "banca-04",
+    titulo: "Banca de cemento",
+    descripcion:
+      "Banca funcional y estética para jardines y terrazas.",
+    precio: "$60.000",
+    categoria: "Accesorios",
+    sku: "BNC-004",
+    stock: 20,
+    material: "Cemento",
+    dimensiones: "25 × 25 × 5 cm",
+    imagen_principal: "/image/Banca.png",
+    galeria: ["/image/Banca.png"],
+    destacada: false,
+    disponible: true,
+    created_at: new Date().toISOString(),
+  },
+  {
+    id: "Esfera-05",
+    slug: "esfera-05",
+    titulo: "Esfera de cemento",
+    descripcion:
+      "Esfera funcional y estética para jardines y terrazas.",
+    precio: "$60.000",
+    categoria: "Accesorios",
+    sku: "ESF-005",
+    stock: 20,
+    material: "Cemento",
+    dimensiones: "25 × 25 × 5 cm",
+    imagen_principal: "/image/Esfera.png",
+    galeria: ["/image/Esfera.png"],
+    destacada: false,
+    disponible: true,
+    created_at: new Date().toISOString(),
+},
+{
+      id: "cilindro-06",
+    slug: "cilindro-06",
+    titulo: "Cilindro de cemento",
+    descripcion:
+      "Cilindro funcional y estético para jardines y terrazas.",
+    precio: "$60.000",
+    categoria: "Accesorios",
+    sku: "CLD-006",
+    stock: 20,
+    material: "Cemento",
+    dimensiones: "25 × 25 × 5 cm",
+    imagen_principal: "/image/Cilindro.png",
+    galeria: ["/image/Cilindro.png"],
+    destacada: false,
+    disponible: true,
+    created_at: new Date().toISOString(),
+},
 ];
 
 export default function HomePage() {
@@ -84,10 +137,7 @@ export default function HomePage() {
         <Personalizados />
       </ScrollReveal>
       <ScrollReveal delayMs={60}>
-        <Proceso />
-      </ScrollReveal>
-      <ScrollReveal delayMs={60}>
-        <Galeria />
+        <Nosotros />
       </ScrollReveal>
       <ScrollReveal delayMs={60}>
         <FAQ />

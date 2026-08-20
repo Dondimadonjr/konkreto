@@ -47,7 +47,7 @@ export default function Categorias() {
   return (
     <section
       id="categorias"
-      className="relative mx-auto max-w-7xl scroll-mt-20 px-5 py-16 sm:px-6 sm:py-20 lg:px-8"
+      className="relative mx-auto max-w-7xl scroll-mt-10 px-5 py-16 sm:px-6 sm:py-20 lg:px-8"
       style={{ zIndex: 1 }}
     >
       <div className="mb-10 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">

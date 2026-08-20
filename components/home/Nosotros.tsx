@@ -15,7 +15,7 @@ export default function Nosotros() {
     >
       <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
         <div>
-          <p className="mb-3 text-sm uppercase tracking-[0.35em] text-[#8f9b7c]">Konkreto</p>
+          <p className="mb-3 text-sm uppercase tracking-[0.35em] text-[#8f9b7c]">Mortarium</p>
           <h2 className="text-4xl font-semibold leading-tight text-[#f5f1eb] md:text-5xl">
             Productos de cemento con presencia, textura y valor duradero.
           </h2>
@@ -23,7 +23,7 @@ export default function Nosotros() {
 
         <div className="rounded-4xl border border-white/10 bg-white/6 p-6 shadow-[0_16px_46px_rgba(0,0,0,0.16)] backdrop-blur-sm sm:p-8">
           <p className="text-lg leading-8 text-[#d7d0c8]">
-            En <span className="font-semibold tracking-[0.08em] text-[#f5f1eb]">Konkreto</span> trabajamos con cemento y diseño para crear piezas funcionales y decorativas que aportan carácter a jardines, terrazas y proyectos exteriores.
+            En <span className="font-semibold tracking-[0.08em] text-[#f5f1eb]">Mortarium</span> trabajamos con cemento y diseño para crear piezas funcionales y decorativas que aportan carácter a jardines, terrazas y proyectos exteriores.
           </p>
           <p className="mt-6 text-lg leading-8 text-[#d7d0c8]">
             Combinamos fabricación artesanal, resistencia y un lenguaje visual contemporáneo para que cada pieza se vea elegante y perdure en el tiempo.

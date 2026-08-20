@@ -12,7 +12,7 @@ export default function Header() {
     ["Productos", "#productos"],
     ["Categorías", "#categorias"],
     ["Personalizados", "#personalizados"],
-    ["Proceso", "#proceso"],
+    ["Contacto", "#contacto"],
     ["FAQ", "#faq"],
   ];
 
@@ -73,12 +73,12 @@ export default function Header() {
         {/* Logo */}
         <a
           href="#"
-          aria-label="Ir al inicio de Konkreto"
+          aria-label="Ir al inicio de Mortarium"
           className="flex items-center gap-3 transition hover:opacity-85"
         >
           <Image
-            src="/logos/favicon.png"
-            alt="Konkreto"
+            src="/Iconos/icono.png"
+            alt="Mortarium"
             width={160}
             height={80}
             className={`w-auto object-contain transition-all duration-300 ${
@@ -88,7 +88,7 @@ export default function Header() {
           />
           <span className="hidden flex-col leading-none sm:flex">
             <span className="text-[0.95rem] font-semibold tracking-[0.26em] text-[#f5f1eb]">
-              KONKRETO
+              MORTARIUM
             </span>
             <span className="mt-1 text-[0.58rem] font-medium uppercase tracking-[0.3em] text-[#8f9b7c]">
               Diseño en cemento
@@ -115,7 +115,7 @@ export default function Header() {
         {/* CTA desktop */}
         <div className="flex items-center gap-2">
           <a
-            href="https://wa.me/56972086522?text=Hola,%20quiero%20solicitar%20una%20cotizaci%C3%B3n%20de%20Konkreto."
+            href="https://wa.me/56972086522?text=Hola,%20quiero%20solicitar%20una%20cotizaci%C3%B3n%20de%20Mortarium."
             target="_blank"
             rel="noopener noreferrer"
             className="hidden rounded-full bg-[#f5f1eb] px-5 py-2.5 text-sm font-semibold text-[#111111] shadow-lg shadow-black/10 transition hover:-translate-y-0.5 hover:bg-white md:inline-flex"
@@ -143,7 +143,7 @@ export default function Header() {
             />
             <span
               className={`block h-[1.5px] w-5 bg-white transition-all duration-300 ${
-                menuAbierto ? "-translate-y-[6.5px] -rotate-45" : ""
+                menuAbierto ? "translate-y-[6.5px] -rotate-45" : ""
               }`}
             />
           </button>
@@ -172,7 +172,7 @@ export default function Header() {
             </a>
           ))}
           <a
-            href="https://wa.me/56972086522?text=Hola,%20quiero%20solicitar%20una%20cotizaci%C3%B3n%20de%20Konkreto."
+            href="https://wa.me/56972086522?text=Hola,%20quiero%20solicitar%20una%20cotizaci%C3%B3n%20de%20Mortarium."
             target="_blank"
             rel="noopener noreferrer"
             onClick={handleNavClick}

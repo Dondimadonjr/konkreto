@@ -1,10 +1,10 @@
 export default function FloatingWhatsApp() {
   return (
     <a
-      href="https://wa.me/56972086522?text=Hola,%20tengo%20una%20consulta%20sobre%20productos%20Konkreto."
+      href="https://wa.me/56972086522?text=Hola,%20tengo%20una%20consulta%20sobre%20productos%20Mortarium."
       target="_blank"
       rel="noopener noreferrer"
-      aria-label="Contactar a Konkreto por WhatsApp"
+      aria-label="Contactar a Mortarium por WhatsApp"
       className="group fixed bottom-6 right-5 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] shadow-[0_8px_30px_rgba(37,211,102,0.35)] transition duration-300 hover:scale-105 hover:shadow-[0_12px_40px_rgba(37,211,102,0.5)] sm:bottom-7 sm:right-6"
     >
       {/* Ícono SVG oficial WhatsApp */}

@@ -24,8 +24,8 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
     default:
-      "Konkreto | Maceteros y jardineras de cemento con diseño",
-    template: "%s | Konkreto",
+      "Mortarium | Maceteros y jardineras de cemento con diseño",
+    template: "%s | Mortarium",
   },
   description:
     "Diseñamos y fabricamos maceteros de cemento, jardineras, bancas y piezas personalizadas. Piezas de cemento para transformar tus espacios con diseño contemporáneo y fabricación artesanal.",
@@ -41,23 +41,23 @@ export const metadata: Metadata = {
     "maceteros decorativos",
     "fabricación de maceteros",
     "productos personalizados de cemento",
-    "Konkreto",
+    "Mortarium",
   ],
   alternates: {
     canonical: "/",
   },
   openGraph: {
-    title: "Konkreto | Maceteros y jardineras de cemento con diseño",
+    title: "Mortarium | Maceteros y jardineras de cemento con diseño",
     description:
       "Piezas de cemento diseñadas para transformar espacios. Maceteros, jardineras y fabricación personalizada con diseño contemporáneo.",
     url: siteUrl,
-    siteName: "Konkreto",
+    siteName: "Mortarium",
     images: [
       {
         url: "/logos/favicon.png",
         width: 1200,
         height: 630,
-        alt: "Konkreto — Piezas de cemento diseñadas",
+        alt: "Mortarium — Piezas de cemento diseñadas",
       },
     ],
     locale: "es_CL",
@@ -65,7 +65,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Konkreto | Maceteros y jardineras de cemento con diseño",
+    title: "Mortarium | Maceteros y jardineras de cemento con diseño",
     description:
       "Piezas de cemento diseñadas para transformar espacios. Maceteros, jardineras y fabricación personalizada.",
     images: ["/logos/favicon.png"],
@@ -86,7 +86,7 @@ const jsonLd = {
     {
       "@type": "Organization",
       "@id": `${siteUrl}/#organization`,
-      name: "Konkreto",
+      name: "Mortarium",
       url: siteUrl,
       description:
         "Diseñamos y fabricamos maceteros de cemento, jardineras, bancas, platos, bases y productos personalizados.",
@@ -112,7 +112,7 @@ const jsonLd = {
       "@type": "WebSite",
       "@id": `${siteUrl}/#website`,
       url: siteUrl,
-      name: "Konkreto",
+      name: "Mortarium",
       publisher: {
         "@id": `${siteUrl}/#organization`,
       },
@@ -121,7 +121,7 @@ const jsonLd = {
     {
       "@type": "LocalBusiness",
       "@id": `${siteUrl}/#business`,
-      name: "Konkreto",
+      name: "Mortarium ",
       url: siteUrl,
       description:
         "Fabricación de maceteros de cemento, jardineras, bancas y productos personalizados en Chile.",

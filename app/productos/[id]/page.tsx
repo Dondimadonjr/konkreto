@@ -56,6 +56,45 @@ const productos: Producto[] = [
     imagen_principal: "/image/Plato.png",
     galeria: ["/image/Plato.png"],
   },
+  {
+    id: "banca-04",
+    slug: "banca-04",
+    titulo: "Banca de cemento",
+    descripcion:
+      "Banca funcional y estética para jardines y terrazas.",
+    precio: "$60.000",
+    categoria: "Accesorios",
+    material: "Cemento",
+    dimensiones: "25 × 25 × 5 cm",
+    imagen_principal: "/image/Banca.png",
+    galeria: ["/image/Banca.png"],
+  },
+  {
+    id: "esfera-05",
+    slug: "esfera-05",
+    titulo: "Esfera de cemento",
+    descripcion:
+    "Esfera funcional y estética para jardines y terrazas.",
+    precio: "$60.000",
+    categoria: "Accesorios",
+    material: "Cemento",
+    dimensiones: "25 × 25 × 5 cm",
+    imagen_principal: "/image/Esfera.png",
+    galeria: ["/image/Esfera.png"],
+  },
+  {
+    id: "cilindro-06",
+    slug: "cilindro-06",
+    titulo: "Cilindro de cemento",
+    descripcion:
+      "Cilindro funcional y estético para jardines y terrazas.",
+    precio: "$60.000",
+    categoria: "Accesorios",
+    material: "Cemento",
+    dimensiones: "25 × 25 × 5 cm",
+    imagen_principal: "/image/Cilindro.png",
+    galeria: ["/image/Cilindro.png"],
+  },
 ];
 
 const WHATSAPP_NUMBER = "56972086522";
@@ -67,7 +106,7 @@ function getProducto(id: string) {
 }
 
 function createWhatsAppUrl(producto: Producto) {
-  const message = `Hola, quiero consultar por el ${producto.titulo} de Konkreto.`;
+  const message = `Hola, quiero consultar por el ${producto.titulo} de Mortarium.`;
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
 }
 
@@ -87,18 +126,18 @@ export async function generateMetadata({
 
   if (!producto) {
     return {
-      title: "Producto no encontrado | Konkreto",
+      title: "Producto no encontrado | Mortarium",
     };
   }
 
   return {
-    title: `${producto.titulo} | Konkreto`,
+    title: `${producto.titulo} | Mortarium`,
     description: `${producto.descripcion} — ${producto.material}, ${producto.dimensiones}.`,
     alternates: {
       canonical: `/productos/${producto.slug}`,
     },
     openGraph: {
-      title: `${producto.titulo} | Konkreto`,
+      title: `${producto.titulo} | Mortarium`,
       description: producto.descripcion,
       type: "website",
       images: [
@@ -171,9 +210,9 @@ export default async function DetalleProducto({
                 height={1050}
                 priority
                 sizes="(max-width: 1024px) 100vw, 60vw"
-                className="aspect-[4/3] w-full object-cover transition duration-700 group-hover:scale-[1.02]"
+                className="aspect-4/3 w-full object-cover transition duration-700 group-hover:scale-[1.02]"
               />
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
+              <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-black/20 via-transparent to-transparent" />
             </div>
           </div>
 
@@ -203,7 +242,7 @@ export default async function DetalleProducto({
 
             {/* Especificaciones */}
             <div className="mt-6 grid grid-cols-2 gap-3">
-              <div className="rounded-xl border border-white/8 bg-white/[0.03] p-4">
+              <div className="rounded-xl border border-white/8 bg-white/3 p-4">
                 <p className="text-xs uppercase tracking-[0.2em] text-white/35">
                   Material
                 </p>
@@ -211,7 +250,7 @@ export default async function DetalleProducto({
                   {producto.material}
                 </p>
               </div>
-              <div className="rounded-xl border border-white/8 bg-white/[0.03] p-4">
+              <div className="rounded-xl border border-white/8 bg-white/3 p-4">
                 <p className="text-xs uppercase tracking-[0.2em] text-white/35">
                   Dimensiones
                 </p>
@@ -243,7 +282,7 @@ export default async function DetalleProducto({
               </a>
 
               <Link
-                href="/"
+                href="/#productos"
                 className="flex w-full items-center justify-center rounded-full border border-white/10 px-6 py-4 text-sm font-medium text-white/75 transition duration-300 hover:border-white/20 hover:bg-white/5 hover:text-white"
               >
                 ← Volver al catálogo
@@ -254,7 +293,7 @@ export default async function DetalleProducto({
             <p className="mt-6 text-xs leading-6 text-white/35">
               ¿Necesitas una medida diferente?{" "}
               <a
-                href="https://wa.me/56972086522?text=Hola,%20quiero%20consultar%20por%20un%20producto%20personalizado%20Konkreto."
+                href="https://wa.me/56972086522?text=Hola,%20quiero%20consultar%20por%20un%20producto%20personalizado%20Mortarium."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-[#8f9b7c] underline-offset-4 transition hover:text-[#aeb99b] hover:underline"
@@ -279,7 +318,7 @@ export default async function DetalleProducto({
             material: producto.material,
             brand: {
               "@type": "Brand",
-              name: "Konkreto",
+              name: "Mortarium",
             },
             offers: {
               "@type": "Offer",

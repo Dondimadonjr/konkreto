@@ -4,17 +4,16 @@ import Image from "next/image";
 
 export default function Hero() {
   return (
-    <section className="relative min-h-svh overflow-hidden text-[#f5f1eb]">
-      {/* Imagen de fondo */}
+    <section className="relative min-h-svh overflow-hidden text-[#f5f1eb]">      
       <Image
         src="/image/imagen_plato.jpg"
-        alt="Piezas de cemento Konkreto — maceteros y jardineras de diseño"
-        fill
+        alt="Piezas de cemento Mortarium — maceteros y jardineras de diseño"
         priority
-        sizes="100vw"
-        className="object-cover object-center"
+        fill
+        sizes="90vw"
+        className="rounded-3xl object-cover object-center"
       />
-
+  
       {/* Oscurecimiento general */}
       <div className="absolute inset-0 bg-black/40" />
 
@@ -29,7 +28,7 @@ export default function Hero() {
         <div className="w-full max-w-170">
           {/* Eyebrow */}
           <p className="mb-6 text-xs font-medium uppercase tracking-[0.38em] text-[#aeb99b]">
-            Konkreto · Fabricación artesanal
+            Mortarium · Fabricación artesanal
           </p>
 
           {/* Título */}
@@ -52,7 +51,7 @@ export default function Hero() {
             </a>
 
             <a
-              href="https://wa.me/56972086522?text=Hola,%20quiero%20cotizar%20un%20proyecto%20con%20Konkreto."
+              href="https://wa.me/56972086522?text=Hola,%20quiero%20cotizar%20un%20proyecto%20con%20Mortarium."
               target="_blank"
               rel="noopener noreferrer"
               className="rounded-full border border-[#8f9b7c]/60 bg-[#8f9b7c]/25 px-6 py-3.5 text-sm font-semibold text-white backdrop-blur-sm transition duration-300 hover:-translate-y-0.5 hover:border-[#8f9b7c]/90 hover:bg-[#8f9b7c]/40"

@@ -26,14 +26,14 @@ export default function CatalogoProductos({ productos }: Props) {
   return (
     <section
       id="productos"
-      className="relative z-20 mx-auto max-w-7xl scroll-mt-16 overflow-visible px-5 pb-4 pt-16 sm:px-6 sm:pt-20 lg:px-8"
+      className="relative z-20 mx-auto max-w-7xl scroll-mt-5 overflow-visible px-5 pb-4 pt-16 sm:px-6 sm:pt-20 lg:px-8"
     >
       <div className="mb-10 max-w-2xl">
         <p className="mb-3 text-xs font-medium uppercase tracking-[0.38em] text-[#8f9b7c]">
           Colección
         </p>
         <h2 className="text-3xl font-semibold leading-tight text-[#f5f1eb] sm:text-4xl">
-          Colección Konkreto
+          Colección Mortarium: maceteros, jardineras y productos de cemento
         </h2>
         <p className="mt-4 text-sm leading-7 text-[#d7d0c8] sm:text-base">
           Una selección de piezas diseñadas para aportar presencia, textura y carácter a tus espacios.
@@ -55,7 +55,7 @@ export default function CatalogoProductos({ productos }: Props) {
               Mientras tanto, puedes escribirnos para solicitar maceteros de cemento, jardineras, bancas o productos personalizados.
             </p>
             <a
-              href="https://wa.me/56972086522?text=Hola,%20quiero%20consultar%20por%20productos%20de%20cemento%20Konkreto."
+              href="https://wa.me/56972086522?text=Hola,%20quiero%20consultar%20por%20productos%20de%20cemento%20Mortarium."
               target="_blank"
               rel="noopener noreferrer"
               className="mt-8 inline-flex rounded-full bg-[#f5f1eb] px-7 py-4 font-semibold text-[#111111] transition hover:-translate-y-0.5"

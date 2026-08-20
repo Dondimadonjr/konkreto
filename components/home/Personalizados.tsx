@@ -45,7 +45,7 @@ export default function Personalizados() {
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <a
-                href="https://wa.me/56972086522?text=Hola,%20quiero%20cotizar%20un%20producto%20personalizado%20Konkreto."
+                href="https://wa.me/56972086522?text=Hola,%20quiero%20cotizar%20un%20producto%20personalizado%20con%20Mortarium."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="rounded-full bg-[#f5f1eb] px-6 py-3 text-sm font-semibold text-[#111111] transition hover:-translate-y-0.5 hover:bg-white"
